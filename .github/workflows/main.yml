@@ -27,8 +27,8 @@ jobs:
       - name: Issue Parser
         uses: stefanbuck/github-issue-praser@v3
         id: issue-parser
-        with:
-          template-path: .github/ISSUE_TEMPLATE/issue_form.yml
+        # with:
+          # template-path: .github/ISSUE_TEMPLATE/issue_form.yml
 
       - name: Log Issue Parser
         run: |
@@ -66,6 +66,8 @@ jobs:
         run: |
           git checkout -b ${{ steps.create.outputs.issue }}
           git push origin ${{ steps.create.outputs.issue }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
       - name: Update issue title
         uses: actions-cool/issues-helper@v3
